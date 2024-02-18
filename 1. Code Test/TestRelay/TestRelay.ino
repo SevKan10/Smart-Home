@@ -62,13 +62,111 @@ void loop() {
   digitalWrite(R8, 1); delay(50);
 
   delay(2000);
-  digitalWrite(R1, 1); delay(50);   digitalWrite(R1, 0); delay(50);
-  digitalWrite(R2, 1); delay(50);   digitalWrite(R2, 0); delay(50);
-  digitalWrite(R3, 1); delay(50);   digitalWrite(R3, 0); delay(50);
-  digitalWrite(R4, 1); delay(50);   digitalWrite(R4, 0); delay(50);
-  digitalWrite(R5, 1); delay(50);   digitalWrite(R5, 0); delay(50);
-  digitalWrite(R6, 1); delay(50);   digitalWrite(R6, 0); delay(50);
-  digitalWrite(R7, 1); delay(50);   digitalWrite(R7, 0); delay(50);
-  digitalWrite(R8, 1); delay(50);   digitalWrite(R8, 0); delay(50);
+  digitalWrite(R1, 0); 
+  digitalWrite(R2, 0); 
+  digitalWrite(R3, 0); 
+  digitalWrite(R4, 0); 
+  digitalWrite(R5, 0);
+  digitalWrite(R6, 0); 
+  digitalWrite(R7, 0); 
+  digitalWrite(R8, 0); 
+
+  delay(2000);
+  digitalWrite(R1, 1); delay(500);  
+  digitalWrite(R1, 0); delay(500); 
+
+  digitalWrite(R1, 1);    
+  digitalWrite(R2, 1); delay(500);  
+
+  digitalWrite(R1, 0); 
+  digitalWrite(R2, 0); delay(500); 
+
+  digitalWrite(R1, 1);   
+  digitalWrite(R2, 1); 
+  digitalWrite(R3, 1); delay(500);  
+
+  digitalWrite(R1, 0);
+  digitalWrite(R2, 0);  
+  digitalWrite(R3, 0); delay(500); 
+
+  digitalWrite(R1, 1);  
+  digitalWrite(R2, 1); 
+  digitalWrite(R3, 1);   
+  digitalWrite(R4, 1); delay(500); 
+
+  digitalWrite(R1, 0);  
+  digitalWrite(R2, 0); 
+  digitalWrite(R3, 0); 
+  digitalWrite(R4, 0); delay(500); 
+
+  digitalWrite(R1, 1); 
+  digitalWrite(R2, 1);  
+  digitalWrite(R3, 1);  
+  digitalWrite(R4, 1); 
+  digitalWrite(R5, 1); delay(500);
+
+  digitalWrite(R1, 0);  
+  digitalWrite(R2, 0); 
+  digitalWrite(R3, 0); 
+  digitalWrite(R4, 0); 
+  digitalWrite(R5, 0); delay(500); 
+
+  digitalWrite(R1, 1);  
+  digitalWrite(R2, 1);  
+  digitalWrite(R3, 1);   
+  digitalWrite(R4, 1); 
+  digitalWrite(R5, 1); 
+  digitalWrite(R6, 1); delay(500);
+
+  digitalWrite(R1, 0); 
+  digitalWrite(R2, 0);  
+  digitalWrite(R3, 0); 
+  digitalWrite(R4, 0); 
+  digitalWrite(R5, 0); 
+  digitalWrite(R6, 0); delay(500); 
+
+  digitalWrite(R1, 1);  
+  digitalWrite(R2, 1); 
+  digitalWrite(R3, 1); 
+  digitalWrite(R4, 1); 
+  digitalWrite(R5, 1); 
+  digitalWrite(R6, 1);
+  digitalWrite(R7, 1); delay(500);
+
+  digitalWrite(R1, 0);
+  digitalWrite(R2, 0); 
+  digitalWrite(R3, 0);
+  digitalWrite(R4, 0);
+  digitalWrite(R5, 0);  
+  digitalWrite(R6, 0); 
+  digitalWrite(R7, 0); delay(500); 
+
+  digitalWrite(R1, 1); 
+  digitalWrite(R2, 1);  
+  digitalWrite(R3, 1);  
+  digitalWrite(R4, 1); 
+  digitalWrite(R5, 1); 
+  digitalWrite(R6, 1); 
+  digitalWrite(R7, 1); 
+  digitalWrite(R8, 1); delay(500);
+
+  digitalWrite(R1, 0); 
+  digitalWrite(R2, 0); 
+  digitalWrite(R3, 0); 
+  digitalWrite(R4, 0); 
+  digitalWrite(R5, 0); 
+  digitalWrite(R6, 0); 
+  digitalWrite(R7, 0); 
+  digitalWrite(R8, 0); delay(500); 
+
+  delay(2000);
+  digitalWrite(R1, 1); delay(200);   digitalWrite(R1, 0); delay(200);
+  digitalWrite(R2, 1); delay(200);   digitalWrite(R2, 0); delay(200);
+  digitalWrite(R3, 1); delay(200);   digitalWrite(R3, 0); delay(200);
+  digitalWrite(R4, 1); delay(200);   digitalWrite(R4, 0); delay(200);
+  digitalWrite(R5, 1); delay(200);   digitalWrite(R5, 0); delay(200);
+  digitalWrite(R6, 1); delay(200);   digitalWrite(R6, 0); delay(200);
+  digitalWrite(R7, 1); delay(200);   digitalWrite(R7, 0); delay(200);
+  digitalWrite(R8, 1); delay(200);   digitalWrite(R8, 0); delay(200);
   delay(2000);
 }
