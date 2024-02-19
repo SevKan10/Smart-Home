@@ -4,7 +4,7 @@
 RTC_DS1307 rtc;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   Wire.begin(23, 22);
 
   if (!rtc.begin()) {
@@ -35,7 +35,6 @@ void loop() {
   Serial.print(now.second(), DEC);
   Serial.println();
 
-  delay(1000);
 }
 
 
