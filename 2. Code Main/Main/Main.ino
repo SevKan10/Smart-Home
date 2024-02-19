@@ -50,23 +50,19 @@ void setup() {
 
 void loop() {
   now = rtc.now();
-
+  
   if (digitalRead(MENU) == 0) {
-    flag++;
-    lcd.clear();
-    if (flag == 1) {
-      settingTime();  
-    }
-    if (flag == 2) {
-      flag = 0;
-    }
-    delay(500);
+      flag++;
+      lcd.clear();
+      delay(500);
+
+      if (flag > 2) {
+        flag = 0;
+      }
   }
 
-  if (flag == 0) {
     printTime();
     turnOnOffDevice(12, 8, 12, 10);
-  }
 }
 
 void Ring(int repeat, int delays){
