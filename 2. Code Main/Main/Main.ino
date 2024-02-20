@@ -37,7 +37,11 @@ DateTime now;
 char daysOfTheWeek[7][12] = {"Sun", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur"};
 int currentHour = -1;
 int flag = 0, flag1 = 1;
-int hOn = 0, mOn = 0, hOff = 0, mOff = 0;
+int hOn, mOn, hOff, mOff;
+int addrHOn = 0;   
+int addrMOn = 1;  
+int addrHOff = 2; 
+int addrMOff = 3;  
 unsigned long Time;
 bool cursor = 1;
 /*=========VARIABLE==========*/
@@ -46,8 +50,11 @@ void setup() {
 
   Serial.begin(9600);     
 
-  // EEPROM.begin(16); 
-  // readEeprom(hOn, mOn, hOff, mOff);
+  EEPROM.begin(1024); 
+  // hOn = EEPROM.read(addrHOn);
+  // mOn = EEPROM.read(addrMOn);
+  // hOff = EEPROM.read(addrHOff);
+  // mOff = EEPROM.read(addrMOff);
 
   pinMode(BUZ, OUTPUT);
   pinMode(LIGHT1, OUTPUT);

@@ -36,11 +36,16 @@ void turnOnOffDevice(int hourOn, int minuteOn, int hourOff, int minuteOff)
 
 void settingTime()
 {
-  int i2 = 3; int i3 = 6; int i4 = 9;
+  int i2 = 4; int i3 = 10; int i4 = 13;
   lcd.setCursor(3, 0);
   lcd.print("SET TIMER:");
-  lcd.setCursor(0, 1);
-  lcd.print(String(hOn)); lcd.print(" "); lcd.print(":"); lcd.print(mOn); lcd.print(" "); lcd.print("|"); lcd.print(String(hOff)); lcd.print(" "); lcd.print(":"); lcd.print(mOff); lcd.print(" ");
+  lcd.setCursor(1, 1);
+  lcd.print(String(hOn)); lcd.print(" "); lcd.print(":"); lcd.print(mOn); lcd.print(" ");
+  lcd.setCursor(7,1);
+  lcd.print("|"); 
+  lcd.setCursor(10,1);
+  lcd.print(String(hOff)); lcd.print(" "); lcd.print(":"); lcd.print(mOff); lcd.print(" ");
+
   if(digitalRead(SW) == 0)
   { 
     Ring(1,50);
@@ -54,7 +59,7 @@ void settingTime()
   switch(flag1)
   {
     case 1:
-      lcd.setCursor(0,1);
+      lcd.setCursor(1,1);
       lcd.write(1);
       //blinkCursor(300);
       if (digitalRead(PLUS) == 0) 
@@ -76,9 +81,8 @@ void settingTime()
     break;
 
     case 2:
-      // if (hOn>=10){i2=i2+1;}
-      // else{i2=3;}
-
+      if(hOn>=10){i2=i2+1;}
+      else{i2=4;}
       lcd.setCursor(i2,1);
       lcd.write(1);
       //blinkCursor(300);
@@ -101,10 +105,6 @@ void settingTime()
     break;
 
     case 3:
-      // if (hOn>=10 || mOn>=10){i3=i3+1;}
-      // else if(hOn>=10 && mOn>=10){i3=i3+3;}
-      // else{i3=6;}
-
       lcd.setCursor(i3,1);
       lcd.write(1);
       //blinkCursor(300);
@@ -127,11 +127,8 @@ void settingTime()
     break;
 
     case 4:
-      // if (hOn>=10 || mOn>=10 || hOff>=10){i4=i4+1;}
-      // else if(hOn>=10 && mOn>=10){i4=i4+3;}
-      // else if(hOn>=10 && mOn>=10 && hOff>=10){i4=i4+4;}
-      // else{i4=9;}
-
+      if(hOff>=10){i4=i4+1;}
+      else{i4=13;}
       lcd.setCursor(i4,1);
       lcd.write(1);
       //blinkCursor(300);
@@ -155,14 +152,17 @@ void settingTime()
   }
   if (digitalRead(ACC) == 0)
   {
-    turnOnOffDevice(hOn, mOn, hOff, mOff);
-    // writeEeprom(hOn, mOn, hOff, mOff);
+    EEPROM.write(addrHOn, hOn);
+    EEPROM.write(addrMOn, mOn);
+    EEPROM.write(addrHOff, hOff);
+    EEPROM.write(addrMOff, mOff);
+
     lcd.clear();
     lcd.setCursor(4,0);
     lcd.print("SET TIME");
     lcd.setCursor(3,1);
     lcd.print("COMPLETED");
-    delay(2000);
+    delay(3000);
     lcd.clear();
     flag = 0;
   }
