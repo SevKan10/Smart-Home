@@ -159,8 +159,9 @@ void settingTime()
       EEPROM.write(addrMOn, mOn);
       EEPROM.write(addrHOff, hOff);
       EEPROM.write(addrMOff, mOff);
+      Serial.println("DATA SAVE SUCCESS");
     } 
-    else {Serial.println("Invalid values. Please enter valid values.");} //Check error
+    else {Serial.println("DATA SAVE FAILED");} //Check error
 
     lcd.clear();
     lcd.setCursor(4,0);

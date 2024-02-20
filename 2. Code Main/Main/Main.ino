@@ -35,6 +35,7 @@ DateTime now;
 /*=========PERIPHERAL==========*/
 
 char daysOfTheWeek[7][12] = {"Sun", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur"};
+int a[4];
 int currentHour = -1;
 int flag = 0, flag1 = 1;
 int hOn, mOn, hOff, mOff;
@@ -49,31 +50,26 @@ bool cursor = 1;
 void setup() {
 
   Serial.begin(9600);     
+  Serial.println();
 
   EEPROM.begin(1024); 
-  hOn = EEPROM.read(addrHOn);
-  mOn = EEPROM.read(addrMOn);
-  hOff = EEPROM.read(addrHOff);
-  mOff = EEPROM.read(addrMOff);
-
-  if (hOn == 255 || mOn == 255 || hOff == 255 || mOff == 255) {Serial.println("Invalid values read from EEPROM.");} //Check error
-  if (hOn < 0 || hOn > 23) {
-    hOn = 0;
+  for (int i = 0; i>=4; i++)
+  {
+    a[i] = EEPROM.read(i);
+    delay(100);
   }
-
-  if (mOn < 0 || mOn > 59) {
-    mOn = 0;
-  }
-
-  if (hOff < 0 || hOff > 23) {
-    hOff = 0;
-  }
-
-  if (mOff < 0 || mOff > 59) {
-    mOff = 0;
-  }
-  //Check error
+  hOn = a[0];
+  mOn = a[1];
+  hOff = a[2];
+  mOff = a[3];
+  Serial.print(a[0]); Serial.print("\t");
+  Serial.print(a[1]); Serial.print("\t");
+  Serial.print(a[2]); Serial.print("\t");
+  Serial.println(a[3]);
   
+  if (hOn == 255 || mOn == 255 || hOff == 255 || mOff == 255) {Serial.println("READ DATA FAILED");} //Check error
+  else{Serial.println("READ DATA SUCCESS");}
+
   pinMode(BUZ, OUTPUT);
   pinMode(LIGHT1, OUTPUT);
   pinMode(LIGHT2, OUTPUT);
