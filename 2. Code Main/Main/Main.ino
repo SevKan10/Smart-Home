@@ -51,11 +51,29 @@ void setup() {
   Serial.begin(9600);     
 
   EEPROM.begin(1024); 
-  // hOn = EEPROM.read(addrHOn);
-  // mOn = EEPROM.read(addrMOn);
-  // hOff = EEPROM.read(addrHOff);
-  // mOff = EEPROM.read(addrMOff);
+  hOn = EEPROM.read(addrHOn);
+  mOn = EEPROM.read(addrMOn);
+  hOff = EEPROM.read(addrHOff);
+  mOff = EEPROM.read(addrMOff);
 
+  if (hOn == 255 || mOn == 255 || hOff == 255 || mOff == 255) {Serial.println("Invalid values read from EEPROM.");} //Check error
+  if (hOn < 0 || hOn > 23) {
+    hOn = 0;
+  }
+
+  if (mOn < 0 || mOn > 59) {
+    mOn = 0;
+  }
+
+  if (hOff < 0 || hOff > 23) {
+    hOff = 0;
+  }
+
+  if (mOff < 0 || mOff > 59) {
+    mOff = 0;
+  }
+  //Check error
+  
   pinMode(BUZ, OUTPUT);
   pinMode(LIGHT1, OUTPUT);
   pinMode(LIGHT2, OUTPUT);
@@ -74,12 +92,12 @@ void setup() {
 
   if (!rtc.begin()) 
   {
-    Serial.println("Couldn't find RTC");
+    Serial.println("Couldn't find RTC"); //Check error
     while (1);
   }
   if (!rtc.isrunning()) 
   {
-    Serial.println("RTC is NOT running!");
+    Serial.println("RTC is NOT running!"); //Check error
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
 }

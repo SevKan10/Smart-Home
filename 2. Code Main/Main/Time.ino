@@ -40,11 +40,13 @@ void settingTime()
   lcd.setCursor(3, 0);
   lcd.print("SET TIMER:");
   lcd.setCursor(1, 1);
-  lcd.print(String(hOn)); lcd.print(" "); lcd.print(":"); lcd.print(mOn); lcd.print(" ");
+  lcd.print(hOn); lcd.print(" "); lcd.print(":"); lcd.print(mOn); lcd.print(" ");
   lcd.setCursor(7,1);
   lcd.print("|"); 
   lcd.setCursor(10,1);
-  lcd.print(String(hOff)); lcd.print(" "); lcd.print(":"); lcd.print(mOff); lcd.print(" ");
+  lcd.print(hOff); lcd.print(" "); lcd.print(":"); lcd.print(mOff); lcd.print(" ");
+
+
 
   if(digitalRead(SW) == 0)
   { 
@@ -52,7 +54,6 @@ void settingTime()
     flag1++;
     lcd.clear();
     delay(50);
-    
     if(flag1>4){flag1 = 1;}
   }
   
@@ -152,10 +153,14 @@ void settingTime()
   }
   if (digitalRead(ACC) == 0)
   {
-    EEPROM.write(addrHOn, hOn);
-    EEPROM.write(addrMOn, mOn);
-    EEPROM.write(addrHOff, hOff);
-    EEPROM.write(addrMOff, mOff);
+    if (hOn >= 0 && hOn <= 23 && mOn >= 0 && mOn <= 59 && hOff >= 0 && hOff <= 23 && mOff >= 0 && mOff <= 59) 
+    {
+      EEPROM.write(addrHOn, hOn);
+      EEPROM.write(addrMOn, mOn);
+      EEPROM.write(addrHOff, hOff);
+      EEPROM.write(addrMOff, mOff);
+    } 
+    else {Serial.println("Invalid values. Please enter valid values.");} //Check error
 
     lcd.clear();
     lcd.setCursor(4,0);
