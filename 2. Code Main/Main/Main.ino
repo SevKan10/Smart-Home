@@ -31,16 +31,17 @@ DateTime now;
 #define MINUS 5
 #define SW 18
 #define ACC 19
-
+#define SEL 21
 /*=========PERIPHERAL==========*/
 
 char daysOfTheWeek[7][12] = {"Sun", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur"};
 int a[4];
 int currentHour = -1;
-int flag = 0, flag1 = 1;
+int flag = 0, flag1 = 1, flag2 = 1;
 int hOn, mOn, hOff, mOff;
 unsigned long Time;
 bool cursor = 1;
+bool deviceOn;
 /*=========VARIABLE==========*/
 
 void setup() {
@@ -74,13 +75,13 @@ void setup() {
   pinMode(MINUS, INPUT_PULLUP);
   pinMode(SW, INPUT_PULLUP);
   pinMode(ACC, INPUT_PULLUP);
+  pinMode(SEL, INPUT_PULLUP);
 
   Wire.begin(23, 22);
 
   lcd.init();
   lcd.backlight();
   lcd.createChar(1, degree);
-
 
   if (!rtc.begin()) 
   {
@@ -96,31 +97,32 @@ void setup() {
 
 void loop() {
   now = rtc.now();
+  turnOnOffDevice(hOn, mOn, hOff, mOff);
 
-  if (digitalRead(MENU) == 0) 
+  static bool staMenu = 1;
+  if (digitalRead(MENU) == 0 && staMenu == 1) 
   {
     Ring(1,50);
-
     flag++;
     lcd.clear();
     delay(200);
-
     if (flag>2){flag = 0;}
   }
+  staMenu = digitalRead(MENU);
+
   switch(flag) 
   {
     case 0:
       printTime();
-      turnOnOffDevice(hOn, mOn, hOff, mOff);
+      flag2=1;
     break;
 
     case 1:
-      settingTime();
+      selectMode();
     break;
 
     case 2:
-      flag = 0;
+      flag=0;
     break;
   }
 }
-
