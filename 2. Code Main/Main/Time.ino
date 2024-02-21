@@ -11,16 +11,12 @@ void printTime()
 
   lcd.setCursor(10,1);
   lcd.print(">MENU<");
-  if(now.hour() != currentHour)
-  {
-    Ring(2,100);
-    currentHour = now.hour();
-  }
+  if(now.hour() != currentHour){Ring(2,100); currentHour = now.hour();}
 }
 
 void turnOnOffDevice(int hourOn, int minuteOn, int hourOff, int minuteOff)
 {
-  if(now.hour() == hourOn && now.minute() == minuteOn)
+  if(now.hour() => hourOn && now.minute() => minuteOn && now.hour() < hourOff && now.minute() < minuteOff)
   {
     // Ring(1,100);
     digitalWrite(LIGHT1, 1);
@@ -255,7 +251,6 @@ void settingTime()
       delay(100);
       Serial.println("DATA SAVE SUCCESS");
     } 
-
     else {Serial.println("DATA SAVE FAILED");} //Check error
 
     lcd.clear();
