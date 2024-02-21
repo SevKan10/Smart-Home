@@ -39,10 +39,6 @@ int a[4];
 int currentHour = -1;
 int flag = 0, flag1 = 1;
 int hOn, mOn, hOff, mOff;
-int addrHOn = 0;   
-int addrMOn = 1;  
-int addrHOff = 2; 
-int addrMOff = 3;  
 unsigned long Time;
 bool cursor = 1;
 /*=========VARIABLE==========*/
@@ -53,7 +49,7 @@ void setup() {
   Serial.println();
 
   EEPROM.begin(1024); 
-  for (int i = 0; i>=4; i++)
+  for (int i = 0; i<4; i++)
   {
     a[i] = EEPROM.read(i);
     delay(100);
