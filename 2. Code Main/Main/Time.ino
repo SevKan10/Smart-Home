@@ -16,13 +16,13 @@ void printTime()
 
 void turnOnOffDevice(int hourOn, int minuteOn, int hourOff, int minuteOff)
 {
-  if(now.hour() >= hourOn && now.minute() >= minuteOn && now.hour() < hourOff && now.minute() < minuteOff)
+  if(now.hour() == hourOn && now.minute() == minuteOn) //&& now.hour() < hourOff && now.minute() < minuteOff
   {
     // Ring(1,100);
     digitalWrite(LIGHT1, 1);
     digitalWrite(LIGHT2, 1);
   }
-  else if(now.hour() >= hourOff && now.minute() >= minuteOff && now.hour() < hourOn && now.minute() < minuteOn)
+  else if(now.hour() == hourOff && now.minute() == minuteOff) //&& now.hour() < hourOn && now.minute() < minuteOn
   {
     // Ring(1,100);
     digitalWrite(LIGHT1, 0);
