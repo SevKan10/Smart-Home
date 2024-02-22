@@ -96,9 +96,7 @@ void selectMode()
       staAcc2 = digitalRead(ACC);
     break;
 
-    case 3:
-      settingTime();
-    break;
+    case 3: settingTime(); break;
   }
   staSelect = currentSelect;
 }
@@ -238,10 +236,8 @@ void settingTime()
       Serial.print(hOff); Serial.print("\t");
       Serial.println(mOff);
 
-      a[0] = hOn;
-      a[1] = mOn;
-      a[2] = hOff;
-      a[3] = mOff;
+      a[0] = hOn;  a[1] = mOn;
+      a[2] = hOff; a[3] = mOff;
       for (int i = 0; i<4; i++)
       {
         EEPROM.write(i, a[i]);
