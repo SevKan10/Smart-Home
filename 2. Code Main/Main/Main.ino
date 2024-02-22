@@ -22,13 +22,13 @@ DateTime now;
 
 #include <EEPROM.h>
 /*============EEPROM=============*/
-#define BLYNK_TEMPLATE_ID "TMPL6XAznY3Lo"
-#define BLYNK_TEMPLATE_NAME "SMART HOME"
-#define BLYNK_AUTH_TOKEN "DTN0jSU9VzT6GvEJr8ULeTh4nWK8ChY1"
-#include <WiFi.h>
-#include <WiFiClient.h>
-#include <BlynkSimpleEsp32.h>
-#include <string.h>
+// #define BLYNK_TEMPLATE_ID "TMPL6XAznY3Lo"
+// #define BLYNK_TEMPLATE_NAME "SMART HOME"
+// #define BLYNK_AUTH_TOKEN "DTN0jSU9VzT6GvEJr8ULeTh4nWK8ChY1"
+// #include <WiFi.h>
+// #include <WiFiClient.h>
+// #include <BlynkSimpleEsp32.h>
+// #include <string.h>
 /*============BLYNK=============*/
 
 #define BUZ 2
@@ -52,15 +52,15 @@ bool cursor = 1;
 bool deviceOn;
 String numberPhone = "";
 
-char auth[] = BLYNK_AUTH_TOKEN;
-char ssid[] = "MINH KHA";
-char pass[] = "0855508877";
+// char auth[] = BLYNK_AUTH_TOKEN;
+// char ssid[] = "MINH KHA";
+// char pass[] = "0855508877";
 /*=========VARIABLE==========*/
 
 void setup() {
 
   Serial.begin(9600);     
-  Blynk.begin(auth, ssid, pass);
+  // Blynk.begin(auth, ssid, pass);
   Serial.println();
 
   Serial2.begin(115200, SERIAL_8N1, 16, 17);
@@ -128,12 +128,12 @@ void setup() {
 
 void loop() {
   now = rtc.now();
-  Blynk.run();
-  Blynk.virtualWrite(V5, 17);
-  String timeOn = String(hOn) + ":" + String(mOn);
-  String timeOff = String(hOff) + ":" + String(mOff);
-  Blynk.virtualWrite(V0, timeOn);
-  Blynk.virtualWrite(V1, timeOff);
+  // Blynk.run();
+  // Blynk.virtualWrite(V5, 17);
+  // String timeOn = String(hOn) + ":" + String(mOn);
+  // String timeOff = String(hOff) + ":" + String(mOff);
+  // Blynk.virtualWrite(V0, timeOn);
+  // Blynk.virtualWrite(V1, timeOff);
 
   turnOnOffDevice(hOn, mOn, hOff, mOff);
 
