@@ -23,6 +23,11 @@ DateTime now;
 #include <EEPROM.h>
 /*============EEPROM=============*/
 
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <BlynkSimpleEsp32.h>
+/*============BLYNK=============*/
+
 #define BUZ 2
 #define LIGHT1 26
 #define LIGHT2 25
@@ -32,6 +37,9 @@ DateTime now;
 #define SW 18
 #define ACC 19
 #define SEL 21
+#define BLYNK_TEMPLATE_ID "TMPL6XAznY3Lo"
+#define BLYNK_TEMPLATE_NAME "SMART HOME"
+#define BLYNK_AUTH_TOKEN "DTN0jSU9VzT6GvEJr8ULeTh4nWK8ChY1"
 /*=========PERIPHERAL==========*/
 
 char daysOfTheWeek[7][12] = {"Sun", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur"};
@@ -44,11 +52,15 @@ bool cursor = 1;
 bool deviceOn;
 String numberPhone = "";
 
+char auth[] = BLYNK_AUTH_TOKEN;
+char ssid[] = "MINH KHA";
+char pass[] = "0855508877";
 /*=========VARIABLE==========*/
 
 void setup() {
 
   Serial.begin(9600);     
+  Blynk.begin(auth, ssid, pass);
   Serial.println();
 
   Serial2.begin(115200, SERIAL_8N1, 16, 17);

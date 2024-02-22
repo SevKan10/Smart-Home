@@ -8,7 +8,6 @@
 #include <string.h>
 
 char auth[] = BLYNK_AUTH_TOKEN;
-
 char ssid[] = "MINH KHA";
 char pass[] = "0855508877";
 
