@@ -7,7 +7,8 @@ void Ring(int repeat, int delays)
   }
 }
 
-void blinkCursor(int time) {
+void blinkCursor(int time) 
+{
   if (millis() - Time >= time) 
   {
     Time = millis();
