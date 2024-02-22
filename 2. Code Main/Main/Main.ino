@@ -22,10 +22,13 @@ DateTime now;
 
 #include <EEPROM.h>
 /*============EEPROM=============*/
-
+#define BLYNK_TEMPLATE_ID "TMPL6XAznY3Lo"
+#define BLYNK_TEMPLATE_NAME "SMART HOME"
+#define BLYNK_AUTH_TOKEN "DTN0jSU9VzT6GvEJr8ULeTh4nWK8ChY1"
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <BlynkSimpleEsp32.h>
+#include <string.h>
 /*============BLYNK=============*/
 
 #define BUZ 2
@@ -37,9 +40,6 @@ DateTime now;
 #define SW 18
 #define ACC 19
 #define SEL 21
-#define BLYNK_TEMPLATE_ID "TMPL6XAznY3Lo"
-#define BLYNK_TEMPLATE_NAME "SMART HOME"
-#define BLYNK_AUTH_TOKEN "DTN0jSU9VzT6GvEJr8ULeTh4nWK8ChY1"
 /*=========PERIPHERAL==========*/
 
 char daysOfTheWeek[7][12] = {"Sun", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur"};
@@ -75,8 +75,8 @@ void setup() {
     a[i] = EEPROM.read(i);
     delay(100);
   }
-  hOn = a[0];
-  mOn = a[1];
+  hOn  = a[0];
+  mOn  = a[1];
   hOff = a[2];
   mOff = a[3];
   Serial.print(a[0]); Serial.print("\t");
@@ -120,7 +120,7 @@ void setup() {
     lcd.print(i);
     lcd.print(" ");
     lcd.setCursor(3,1);
-    lcd.print("WATTING...");
+    lcd.print("WATTING...");  
     delay(1000);
   }
   lcd.clear();
@@ -128,6 +128,13 @@ void setup() {
 
 void loop() {
   now = rtc.now();
+  Blynk.run();
+  Blynk.virtualWrite(V5, 17);
+  String timeOn = String(hOn) + ":" + String(mOn);
+  String timeOff = String(hOff) + ":" + String(mOff);
+  Blynk.virtualWrite(V0, timeOn);
+  Blynk.virtualWrite(V1, timeOff);
+
   turnOnOffDevice(hOn, mOn, hOff, mOff);
 
   static bool staMenu = 1;
@@ -143,17 +150,8 @@ void loop() {
 
   switch(flag) 
   {
-    case 0:
-      printTime();
-      flag2=1;
-    break;
-
-    case 1:
-      selectMode();
-    break;
-
-    case 2:
-      flag=0;
-    break;
+    case 0: printTime(); flag2=1; break;
+    case 1: selectMode();         break;
+    case 2: flag=0;               break;
   }
 }
