@@ -42,12 +42,20 @@ int hOn, mOn, hOff, mOff;
 unsigned long Time;
 bool cursor = 1;
 bool deviceOn;
+String numberPhone = "";
+
 /*=========VARIABLE==========*/
 
 void setup() {
 
   Serial.begin(9600);     
   Serial.println();
+
+  Serial2.begin(115200, SERIAL_8N1, 16, 17);
+  Serial2.println("AT+CMGF=1"); delay(50);
+  Serial2.println("AT+CNMI=2,2,0,0,0"); delay(50);
+  Serial2.println("AT+CMGL=\"REC UNREAD\""); delay(50);
+  Serial2.println("AT+CMGD=1,4"); delay(50);
 
   EEPROM.begin(1024); 
   for (int i = 0; i<4; i++)
@@ -93,6 +101,17 @@ void setup() {
     Serial.println("RTC is NOT running!"); //Check error
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
+
+  for(int i = 10; i >-1 ;i-- )
+  {  
+    lcd.setCursor(7,0);
+    lcd.print(i);
+    lcd.print(" ");
+    lcd.setCursor(3,1);
+    lcd.print("WATTING...");
+    delay(1000);
+  }
+  lcd.clear();
 }
 
 void loop() {
