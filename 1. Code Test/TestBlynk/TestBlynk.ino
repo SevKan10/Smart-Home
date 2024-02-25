@@ -23,3 +23,8 @@ void loop()
   Blynk.virtualWrite(V5, 17);
   delay(2000);
 }
+// BLYNK_WRITE(V2) {int relayState = param.asInt(); digitalWrite(LIGHT1, relayState);}
+// BLYNK_WRITE(V3) {hOn = param.asInt();}
+// BLYNK_WRITE(V4) {mOn = param.asInt();}
+// BLYNK_WRITE(V6) {hOff = param.asInt();}
+// BLYNK_WRITE(V7) {mOff = param.asInt();}
