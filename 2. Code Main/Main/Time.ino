@@ -33,19 +33,19 @@ void turnOnOffDevice(int hourOn, int minuteOn, int hourOff, int minuteOff)
 void selectMode() 
 {
   static bool staMenu = 1;
-  if (digitalRead(MENU) == 0 && staMenu == 1) {Ring(1,50); flag=0;}
+  if (digitalRead(MENU) == 0 && staMenu == 1) {Ring(1,50); flagMenu=0;}
   staMenu = digitalRead(MENU);
 
   static bool staSelect = 1;
   bool currentSelect = digitalRead(SEL);
   if (currentSelect == 0 && staSelect == 1) {
     Ring(1,50);
-    flag2++;
+    flagMode++;
     lcd.clear();
     delay(50);
-    if (flag2 > 2) { flag2=1; }
+    if (flagMode > 2) { flagMode=1; }
   }
-  switch (flag2) 
+  switch (flagMode) 
   {
     case 1:
       lcd.setCursor(0, 0);
@@ -79,7 +79,7 @@ void selectMode()
         lcd.print("COMPLETED");
         delay(3000);
         lcd.clear();
-        flag = 0;
+        flagMenu = 0;
       }
       staAcc1 = digitalRead(ACC);
     break;
@@ -92,7 +92,7 @@ void selectMode()
       lcd.setCursor(0,1);
       lcd.print("       DEFAULT  ");
       static bool staAcc2 = 1;
-      if (digitalRead(ACC) == 0 && staAcc2 == 1){ Ring(1,500); delay(100); lcd.clear(); flag2=3;}
+      if (digitalRead(ACC) == 0 && staAcc2 == 1){ Ring(1,500); delay(100); lcd.clear(); flagMode=3;}
       staAcc2 = digitalRead(ACC);
     break;
 
@@ -115,21 +115,21 @@ void settingTime()
   lcd.print(hOff); lcd.print(" "); lcd.print(":"); lcd.print(mOff); lcd.print(" ");
 
   static bool staMenu = 1;
-  if (digitalRead(MENU) == 0 && staMenu == 1) {lcd.clear(); Ring(1,50); flag=1; flag2=1;}
+  if (digitalRead(MENU) == 0 && staMenu == 1) {lcd.clear(); Ring(1,50); flagMenu=1; flagMode=1;}
   staMenu = digitalRead(MENU);
 
   static bool staSw = 1;
   if(digitalRead(SW) == 0 && staSw == 1)
   { 
     Ring(1,50);
-    flag1++;
+    flagTime++;
     lcd.clear();
     delay(50);
-    if(flag1>4){flag1=1;}
+    if(flagTime>4){flagTime=1;}
   }
   staSw = digitalRead(SW);
 
-  switch(flag1)
+  switch(flagTime)
   {
     case 1:
       lcd.setCursor(1,1);
@@ -256,8 +256,8 @@ void settingTime()
     lcd.print("COMPLETED");
     delay(3000);
     lcd.clear();
-    flag = 0;
-    flag2 = 1;
+    flagMenu = 0;
+    flagMode = 1;
    }
    staAcc = digitalRead(ACC);
 /*------------ACCEPT SET TIME------------*/
