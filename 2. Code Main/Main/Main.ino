@@ -22,13 +22,13 @@ DateTime now;
 
 #include <EEPROM.h>
 /*============EEPROM=============*/
-// #define BLYNK_TEMPLATE_ID "TMPL6XAznY3Lo"
-// #define BLYNK_TEMPLATE_NAME "SMART HOME"
-// #define BLYNK_AUTH_TOKEN "DTN0jSU9VzT6GvEJr8ULeTh4nWK8ChY1"
-// #include <WiFi.h>
-// #include <WiFiClient.h>
-// #include <BlynkSimpleEsp32.h>
-// #include <string.h>
+#define BLYNK_TEMPLATE_ID "TMPL6XAznY3Lo"
+#define BLYNK_TEMPLATE_NAME "SMART HOME"
+#define BLYNK_AUTH_TOKEN "DTN0jSU9VzT6GvEJr8ULeTh4nWK8ChY1"
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <BlynkSimpleEsp32.h>
+#include <string.h>
 /*============BLYNK=============*/
 
 #define BUZ 2
@@ -45,22 +45,22 @@ DateTime now;
 char daysOfTheWeek[7][12] = {"Sun", "Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur"};
 int a[4];
 int currentHour = -1;
-int flag = 0, flag1 = 1, flag2 = 1;
+int flagMenu = 0, flagTime = 1, flagMode = 1;
 int hOn, mOn, hOff, mOff;
 unsigned long Time;
 bool cursor = 1;
 bool deviceOn;
 String numberPhone = "";
 
-// char auth[] = BLYNK_AUTH_TOKEN;
-// char ssid[] = "MINH KHA";
-// char pass[] = "0855508877";
+char auth[] = BLYNK_AUTH_TOKEN;
+char ssid[] = "MINH KHA";
+char pass[] = "0855508877";
 /*=========VARIABLE==========*/
 
 void setup() {
 
   Serial.begin(9600);     
-  // Blynk.begin(auth, ssid, pass);
+  Blynk.begin(auth, ssid, pass);
   Serial.println();
 
   Serial2.begin(115200, SERIAL_8N1, 16, 17);
@@ -128,12 +128,12 @@ void setup() {
 
 void loop() {
   now = rtc.now();
-  // Blynk.run();
-  // Blynk.virtualWrite(V5, 17);
-  // String timeOn = String(hOn) + ":" + String(mOn);
-  // String timeOff = String(hOff) + ":" + String(mOff);
-  // Blynk.virtualWrite(V0, timeOn);
-  // Blynk.virtualWrite(V1, timeOff);
+  Blynk.run();
+  Blynk.virtualWrite(V5, 17);
+  String timeOn = String(hOn) + ":" + String(mOn);
+  String timeOff = String(hOff) + ":" + String(mOff);
+  Blynk.virtualWrite(V0, timeOn);
+  Blynk.virtualWrite(V1, timeOff);
 
   turnOnOffDevice(hOn, mOn, hOff, mOff);
 
@@ -141,17 +141,23 @@ void loop() {
   if (digitalRead(MENU) == 0 && staMenu == 1) 
   {
     Ring(1,50);
-    flag++;
+    flagMenu++;
     lcd.clear();
     delay(200);
-    if (flag>2){flag = 0;}
+    if (flagMenu>2){flagMenu = 0;}
   }
   staMenu = digitalRead(MENU);
 
-  switch(flag) 
+  switch(flagMenu) 
   {
-    case 0: printTime(); flag2=1; break;
-    case 1: selectMode();         break;
-    case 2: flag=0;               break;
+    case 0: printTime(); flagMode=1; break;
+    case 1: selectMode();            break;
+    case 2: flagMenu=0;              break;
   }
 }
+
+BLYNK_WRITE(V2) {int relayState = param.asInt(); digitalWrite(LIGHT1, relayState);}
+// BLYNK_WRITE(V3) {hOn = param.asInt();}
+// BLYNK_WRITE(V4) {mOn = param.asInt();}
+// BLYNK_WRITE(V6) {hOff = param.asInt();}
+// BLYNK_WRITE(V7) {mOff = param.asInt();}
